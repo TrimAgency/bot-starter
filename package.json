@@ -6,8 +6,11 @@
   "scripts": {
     "build": "rm -rf dist/ && tsc",
     "start": "node dist/index.js",
-    "start:dev": "ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.ts",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watchAll",
+    "build:watch": "onchange 'src/**/*.ts' -- yarn run build",
+    "clean": "rm -rf coverage dist"
   },
   "keywords": [
     "TRIM",
@@ -21,7 +24,13 @@
     "ts-node": "^8.10.1"
   },
   "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.13.5",
+    "jest": "^26.0.1",
+    "nodemon": "^2.0.3",
+    "onchange": "^7.0.2",
     "prettier": "^2.0.5",
+    "ts-jest": "^25.5.0",
     "typescript": "^3.8.3"
   }
 }
