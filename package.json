@@ -1,0 +1,12 @@
+{
+  "name": "bot-starter",
+  "version": "alpha",
+  "description": "TRIM Typescript Starter for Slackbots",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "TRIM - <services@trimagency.com>",
+  "license": "MIT"
+}
