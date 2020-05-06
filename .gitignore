@@ -1,0 +1,10 @@
+.*.sh
+.#*
+.idea
+
+node_modules/
+dist/
+
+yarn.lock
+yarn-error.log
+.yarn-integrity
