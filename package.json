@@ -2,11 +2,11 @@
   "name": "bot-starter",
   "version": "alpha",
   "description": "TRIM Typescript Starter for Slackbots",
-  "main": "index.ts",
+  "main": "server.ts",
   "scripts": {
     "build": "rm -rf dist/ && tsc",
-    "start": "node dist/index.js",
-    "dev": "nodemon src/index.ts",
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts",
     "test": "jest --coverage",
     "test:watch": "jest --coverage --watchAll",
     "build:watch": "onchange 'src/**/*.ts' -- yarn run build",
@@ -21,9 +21,11 @@
   "author": "TRIM - <services@trimagency.com>",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.17.1",
     "ts-node": "^8.10.1"
   },
   "devDependencies": {
+    "@types/express": "^4.17.6",
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.5",
     "jest": "^26.0.1",
