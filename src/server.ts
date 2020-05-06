@@ -1,7 +1,29 @@
+import { Response, Request, Express, NextFunction } from 'express';
 import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
+import { headers } from './middleware/headers';
 
-const app = express();
+// Server Setup
+const port = process.env.SERVER_PORT || 4000;
 
-app.listen(4000, () => {
-  console.log(`*****\nSlackBot Server started on port: ${4000}\n******`);
+export const app: Express = express();
+const corsOptions: cors.CorsOptions = {
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+headers(app);
+
+//  Index Route
+app.get('/', async (req: Request, res: Response, next: NextFunction) => {
+  res.status(200).send({ data: 'OK' });
 });
+
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, async () => {
+    console.log(`*****\nSlackBot Server started on port: ${port}\n******`);
+  });
+}
