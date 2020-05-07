@@ -10,3 +10,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Typescript, Prettier and formatting
 - Testing with Jest
+- Docker for local developmment

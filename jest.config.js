@@ -12,6 +12,6 @@ module.exports = {
       statements: 80,
     },
   },
-  coveragePathIgnorePatterns: ['node_modules/'],
+  coveragePathIgnorePatterns: ['node_modules/', 'src/spec/'],
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
 };

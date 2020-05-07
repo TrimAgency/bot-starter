@@ -12,6 +12,9 @@
     "build:watch": "onchange 'src/**/*.ts' -- yarn run build",
     "clean": "rm -rf coverage dist"
   },
+  "engines": {
+    "node": "14.1.0"
+  },
   "keywords": [
     "TRIM",
     "Slackbot",
