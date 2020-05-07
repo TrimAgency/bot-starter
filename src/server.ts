@@ -3,6 +3,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import { headers } from './middleware/headers';
+import { routes } from './routes';
 
 // Server Setup
 const port = process.env.SERVER_PORT || 4000;
@@ -15,11 +16,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 headers(app);
-
-//  Index Route
-app.get('/', async (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).send({ data: 'OK' });
-});
+routes(app);
 
 if (process.env.NODE_ENV !== 'test') {
   app.listen(port, async () => {
