@@ -12,3 +12,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Testing with Jest
 - Docker for local developmment
 - Connect Slackbot
+- Mongo DB and Mongoose
