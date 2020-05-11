@@ -1,9 +1,13 @@
-import { Response, Request, Express, NextFunction } from 'express';
+import { Express } from 'express';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import { headers } from './middleware/headers';
 import { routes } from './routes';
+import { createRedisClient } from './clients/redis/redis.client';
+
+// Creates Redis Client
+export const redis = createRedisClient();
 
 // Server Setup
 const port = process.env.SERVER_PORT || 4000;

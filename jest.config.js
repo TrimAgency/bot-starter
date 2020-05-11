@@ -9,6 +9,11 @@ module.exports = {
       functions: 80,
     },
   },
-  coveragePathIgnorePatterns: ['node_modules/', 'src/spec/', 'src/server.ts'],
+  coveragePathIgnorePatterns: [
+    'node_modules/',
+    'src/spec/',
+    'src/server.ts',
+    'src/clients',
+  ],
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
 };

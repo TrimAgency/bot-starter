@@ -1,13 +1,4 @@
 # TRIM SlackBot Starter
-<!-- TODO:
-[] Look at Filing system for member bot
-[] Questions are easier all in one area
-[] member bot for examples of convo's
- -->
-
-## Getting Started
-
-1. After cloning the project, in your terminal: `dc up`
 
 ## Prerequisites
 
@@ -16,7 +7,7 @@
 
 2. Set Up Slack
 
-    - In order to get everything set up, you will need to configure a new Slack App inside the [Slack Developer Portal](http://api.slack.com/apps). Source: https://botkit.ai/docs/v4/provisioning/slack-events-api.html
+    - In order to get everything set up, you will need to configure a new Slack App inside the [Slack Developer Portal](http://api.slack.com/apps). [Source](https://botkit.ai/docs/v4/provisioning/slack-events-api.html)
     [ ] Slack Client Secret
     [ ] Slack Client ID
     [ ] OAuth Redirect Url
@@ -27,16 +18,18 @@
         [ ] message.im
         [ ] message.mpim
     [ ] Add your bot to your Slack team
-        [ ] visit https://BOT_URL/install
+        [ ] visit [https://BOT_URL/install](https://BOT_URL/install)
 
+## Quick Start
 
-## Development
+1. After cloning the project, in your terminal: `$ dc up`.  This builds and starts the containers for development.
 
-This app is set up for TDD.
+2. This app is set up for TDD. To begin, access the server's (node app's) command line:
+    - `$ docker exec -it server bash`
 
-1. Once the dev server is running, in your terminal (using the appropriate NODE version) run:
+3. Start the test suite:
     - `$ yarn test:watch`
-    This will re-run the test suite after every save and produce a coverage report
+    *This will re-run the test suite after every save and produce a coverage report*
 
 ## Testing
 
@@ -50,3 +43,5 @@ This app is set up for TDD.
         - When a user has an error from a 3rd Party API (NOT Slack) over the course of the conversation, the bot responds with a general error message.
 
         *NOTE: Be careful and avoid testing the conversation's many possible variations/flow within an integration test.  Use a unit test to test the various possibilities instead.*
+
+    

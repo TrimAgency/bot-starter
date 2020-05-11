@@ -1,17 +1,18 @@
 # Specify a base image
 FROM node:14.1.0-buster AS buster
-
-# First copy the yarn.lock to install stuff and benefit from the layer cache
-COPY ["package.json", "yarn.lock", "/usr/app/"]
+RUN npm install -g nodemon
 
 # Run all the code from here
-WORKDIR /usr/app/
+WORKDIR /app
 
 # Install dependencies
+COPY package.json .
+COPY yarn.lock .
 RUN yarn install
 
 # Copy the code
-COPY [".", "/usr/app/"]
+COPY . .
 
-# Build the project
 RUN yarn build
+
+EXPOSE 4000

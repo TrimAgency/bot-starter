@@ -1,5 +1,5 @@
 import { Express, Request, Response, NextFunction } from 'express';
-import { slackEventsController } from './bot/controllers/slack-events.controller';
+import { slackEventsController } from './bots/slack/controllers/slack-events.controller';
 
 export const routes = (app: Express) => {
   app.get('/', async (req: Request, res: Response, next: NextFunction) => {

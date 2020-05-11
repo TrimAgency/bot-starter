@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { MONGO_URI } from '../constants';
+import { MONGO_URI } from '../../constants';
 
 export const db = () => {
   console.log('MONGO_URI', MONGO_URI);
