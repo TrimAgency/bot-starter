@@ -5,7 +5,9 @@
 1. Set up A URL for the OAuth redirect you will need once your slack wprkspace and app are set up
     - [ngrok](ngrok.com) is helpful for this
 
-2. Set Up Slack
+2. Rename `example.env` to `.env`
+
+3. Set Up Slack
 
     - In order to get everything set up, you will need to configure a new Slack App inside the [Slack Developer Portal](http://api.slack.com/apps). [Source](https://botkit.ai/docs/v4/provisioning/slack-events-api.html)
     [ ] Slack Client Secret
