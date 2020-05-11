@@ -44,4 +44,11 @@
 
         *NOTE: Be careful and avoid testing the conversation's many possible variations/flow within an integration test.  Use a unit test to test the various possibilities instead.*
 
-    
+- To test persisted objects this reposotory uses a [Jest preset](https://github.com/shelfio/jest-mongodb) for [mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server).  This preset sets the process.env.MONGO_URL for your convenience.
+
+## Adding Libraries
+
+1. `$ docker exec -it bot-server bash`
+2. Install using yarn
+3. `$docker-compose down`
+4. `$ docker-compose up --build`

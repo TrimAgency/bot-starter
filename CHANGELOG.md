@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Typescript, Prettier and formatting
-- Testing with Jest
+- Testing with Jest + MongoDB in-memory server
 - Docker for local developmment
 - Connect Slackbot
 - Mongo DB and Mongoose

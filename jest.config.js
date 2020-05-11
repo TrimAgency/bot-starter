@@ -1,9 +1,9 @@
-process.env.SERVER_PORT = 5000;
 process.env.NODE_ENV = 'test';
 
+const { defaults: tsjPreset } = require('ts-jest/presets');
 module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
+  preset: '@shelf/jest-mongodb',
+  transform: tsjPreset.transform,
   coverageThreshold: {
     global: {
       functions: 80,
