@@ -1,80 +1,24 @@
+import { SlackAdapter, SlackBotWorker } from 'botbuilder-adapter-slack';
 import { Botkit, BotkitMessage } from 'botkit';
-import { configSlackBotAdapter } from '../slack-adapter';
-import {
-  SlackBotWorker,
-  SlackDialog,
-  SlackAdapter,
-  SlackEventMiddleware,
-  SlackMessageTypeMiddleware,
-} from 'botbuilder-adapter-slack';
 import { Response, Request } from 'express';
+import { storage } from './storage';
+import { SLACK_WEBHOOK } from '../../constants';
+// Conversations
+import { onMessageConversation } from './conversations/message.conversation';
 
-import { MONGO_URI } from '../../../constants';
+export const initSlackController = (adapter: SlackAdapter) => {
+  const controller = new Botkit({
+    adapter,
+    webhook_uri: SLACK_WEBHOOK,
+    storage,
+    // ...other options
+  });
 
-const { MongoDbStorage } = require('botbuilder-storage-mongodb');
-
-let storage: any = null;
-
-storage = new MongoDbStorage({
-  url: MONGO_URI,
-});
-
-const slackAdapter: SlackAdapter = new SlackAdapter({
-  // auth token for a single-team app
-  botToken: process.env.SLACK_BOT_TOKEN,
-
-  // parameters used to secure webhook endpoint
-  verificationToken: process.env.SLACK_BOT_VERIFICATION_TOKEN,
-  clientSigningSecret: process.env.SLACK_CLIENT_SIGNING_SECRET,
-
-  // credentials used to set up oauth for multi-team apps
-  clientId: process.env.SLACK_CLIENT_ID,
-  clientSecret: process.env.SLACK_CLIENT_SECRET,
-  scopes: ['bot'],
-  redirectUri: process.env.SLACK_BOT_REDIRECT_URI,
-  // getTokenForTeam,
-  // getBotUserByTeam,
-});
-
-// Use SlackEventMiddleware to emit events that match their original Slack event types.
-slackAdapter.use(new SlackEventMiddleware());
-
-// Use SlackMessageType middleware to further classify messages as direct_message,
-// direct_mention, or mention
-slackAdapter.use(new SlackMessageTypeMiddleware());
-
-export const controller = new Botkit({
-  adapter: slackAdapter,
-  webhook_uri: '/api/messages',
-  storage,
-  // ...other options
-});
-
-export const configSlackBotController = (controller: Botkit) => {
   controller.ready(async () => {
-    const team = process.env.SLACK_BOT_TEAM_ID || 'example-team';
-    const channel = process.env.SLACK_BOT_DEFAULT_CHANNEL || 'general';
+    // Generic message response
+    onMessageConversation(controller);
 
-    console.log('channel', channel);
-    const userId = process.env.SLACK_BOT_USER_ID || 'UACTM8B4K';
-
-    // let bot = await controller.spawn(team);
-    // try {
-    //   // await bot.startConversationInChannel(channel, userId);
-    // await bot.startPrivateConversation(userId);
-    // bot.say('I AM AWOKEN.');
-    // } catch (error) {
-    // console.log('Error starting worker error', error);
-    // }
-
-    controller.on('message', async (bot, message) => {
-      await bot.reply(message, 'I heard a message!');
-    });
-
-    /*
-    Example Functions
-    */
-
+    // On DM example
     controller.on(
       'direct_message',
       async (bot: SlackBotWorker, message: BotkitMessage) => {
@@ -122,7 +66,6 @@ export const configSlackBotController = (controller: Botkit) => {
         );
       }
     );
-
     controller.hears(
       'threaded',
       'message,direct_message',
@@ -247,6 +190,7 @@ export const configSlackBotController = (controller: Botkit) => {
       }
     );
 
+    // Unsure if this is working
     controller.on(
       'slash_command',
       async (bot: SlackBotWorker, message: BotkitMessage) => {
@@ -262,44 +206,6 @@ export const configSlackBotController = (controller: Botkit) => {
         bot.httpBody({
           text: 'You can send an immediate response using bot.httpBody()',
         });
-      }
-    );
-
-    controller.on(
-      'interactive_message',
-      async (bot: SlackBotWorker, message: BotkitMessage) => {
-        console.log('INTERACTIVE MESSAGE', message);
-
-        switch (message.actions[0].name) {
-          case 'replace':
-            await bot.replyInteractive(
-              message,
-              '[ A previous message was successfully replaced with this less exciting one. ]'
-            );
-            break;
-          case 'dialog':
-            await bot.replyWithDialog(
-              message,
-              new SlackDialog('this is a dialog', '123', 'Submit', [
-                {
-                  type: 'text',
-                  label: 'Field 1',
-                  name: 'field1',
-                },
-                {
-                  type: 'text',
-                  label: 'Field 2',
-                  name: 'field2',
-                },
-              ])
-                .notifyOnCancel(true)
-                .state('foo')
-                .asObject()
-            );
-            break;
-          default:
-            await bot.reply(message, 'Got a button click!');
-        }
       }
     );
 
@@ -326,13 +232,14 @@ export const configSlackBotController = (controller: Botkit) => {
     );
   });
 
-  controller.webserver.get('/', (res: Response) => {
+  controller.webserver.get('/', ({ res }: { res: Response }) => {
     res.send(`This app is running Botkit ${controller.version}.`);
   });
 
   controller.webserver.get(
     '/install/auth',
     async (req: Request, res: Response) => {
+      console.log('req', req);
       try {
         const results = await controller.adapter.validateOauthCode(
           req.query.code

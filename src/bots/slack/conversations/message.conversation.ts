@@ -1,10 +1,11 @@
 import { SlackBotWorker } from 'botbuilder-adapter-slack';
-import { BotkitMessage } from 'botkit';
-import { controller } from '../controllers/slack-message.controller';
+import { BotkitMessage, Botkit } from 'botkit';
 
-export const onMessage = async (
-  bot: SlackBotWorker,
-  message: BotkitMessage
-) => {
-  await bot.reply(message, 'I heard a message!');
+export const onMessageConversation = async (controller: Botkit) => {
+  controller.on(
+    'message',
+    async (bot: SlackBotWorker, message: BotkitMessage) => {
+      await bot.reply(message, 'I heard a message!');
+    }
+  );
 };

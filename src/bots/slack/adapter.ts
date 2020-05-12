@@ -7,39 +7,40 @@ import {
 let tokenCache: any = {};
 let userCache: any = {};
 
-async function getTokenForTeam(teamId: string): Promise<any> {
+const getTokenForTeam = async (teamId: string): Promise<any> => {
   if (tokenCache[teamId]) {
     return new Promise((resolve) => {
-      setTimeout(function () {
+      setTimeout(() => {
         resolve(tokenCache[teamId]);
       }, 150);
     });
   } else {
     console.error('Team not found in tokenCache: ', teamId);
     return new Promise((resolve) => {
-      setTimeout(function () {
+      setTimeout(() => {
         resolve(null);
       }, 150);
     });
   }
-}
+};
 
-async function getBotUserByTeam(teamId: string): Promise<any> {
+const getBotUserByTeam = async (teamId: string): Promise<any> => {
   if (userCache[teamId]) {
     return new Promise((resolve) => {
-      setTimeout(function () {
+      setTimeout(() => {
         resolve(userCache[teamId]);
       }, 150);
     });
   } else {
     console.error('Team not found in userCache: ', teamId);
     return new Promise((resolve) => {
-      setTimeout(function () {
+      setTimeout(() => {
         resolve(null);
       }, 150);
     });
   }
-}
+};
+
 export const configSlackBotAdapter = async () => {
   // A BotKit configuration
   const slackAdapter: SlackAdapter = new SlackAdapter({
@@ -65,5 +66,6 @@ export const configSlackBotAdapter = async () => {
   // Use SlackMessageType middleware to further classify messages as direct_message,
   // direct_mention, or mention
   slackAdapter.use(new SlackMessageTypeMiddleware());
+
   return slackAdapter;
 };
