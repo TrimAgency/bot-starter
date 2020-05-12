@@ -3,3 +3,32 @@ export const MONGO_URI = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${
 
 // Slack Webhook
 export const SLACK_WEBHOOK = `/api/messages`;
+
+// SlackBot Scopes
+export const BOT_SCOPE_LIST = [
+  'channels:history',
+  'channels:join',
+  'channels:manage',
+  'channels:read',
+  'chat:write',
+  'chat:write.customize',
+  'chat:write.public',
+  'commands',
+  'groups:history',
+  'groups:read',
+  'groups:write',
+  'im:history',
+  'im:read',
+  'im:write',
+  'incoming-webhook',
+  'mpim:history',
+  'mpim:read',
+  'mpim:write',
+  'team:read',
+  'usergroups:read',
+  'usergroups:write',
+  'users.profile:read',
+  'users:read',
+  'users:read.email',
+  'users:write',
+];

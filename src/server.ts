@@ -1,4 +1,4 @@
-// Load enviornment
+// Load environment
 require('dotenv').config();
 import * as e from 'express';
 import * as bodyParser from 'body-parser';

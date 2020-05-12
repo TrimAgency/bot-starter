@@ -14,7 +14,7 @@ describe('the Server', () => {
     });
   });
 
-  it('should NOT be listening in the TEST enviornment', async () => {
+  it('should NOT be listening in the TEST environment', async () => {
     const spy = jest.spyOn(app, 'listen');
     expect(spy).toHaveBeenCalledTimes(0);
   });

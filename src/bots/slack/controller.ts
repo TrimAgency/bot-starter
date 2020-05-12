@@ -4,7 +4,7 @@ import { Response, Request } from 'express';
 import { storage } from './storage';
 import { SLACK_WEBHOOK } from '../../constants';
 // Conversations
-import { onMessageConversation } from './conversations/message.conversation';
+import { onMessageConversation } from './modules/message.conversation';
 
 export const initSlackController = (adapter: SlackAdapter) => {
   const controller = new Botkit({

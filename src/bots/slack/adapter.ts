@@ -3,6 +3,7 @@ import {
   SlackEventMiddleware,
   SlackMessageTypeMiddleware,
 } from 'botbuilder-adapter-slack';
+import { BOT_SCOPE_LIST } from '../../constants';
 
 let tokenCache: any = {};
 let userCache: any = {};
@@ -54,10 +55,11 @@ export const configSlackBotAdapter = async () => {
     // credentials used to set up oauth for multi-team apps
     clientId: process.env.SLACK_CLIENT_ID,
     clientSecret: process.env.SLACK_CLIENT_SECRET,
-    scopes: ['bot'],
+    scopes: BOT_SCOPE_LIST,
     redirectUri: process.env.SLACK_BOT_REDIRECT_URI,
     getTokenForTeam,
     getBotUserByTeam,
+    oauthVersion: 'v2',
   });
 
   // Use SlackEventMiddleware to emit events that match their original Slack event types.
