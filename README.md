@@ -27,14 +27,15 @@
 ## Quick Start
 
 After cloning the project, in your terminal:
+
 1. Install dependencies `$ yarn install`
 
 2. `$ dc up`.  This builds and starts the containers for development.
 
-2. This app is set up for TDD. To begin, access the server's (node app's) command line:
+3. This app is set up for TDD. To begin, access the server's (node app's) command line:
     - `$ docker exec -it server bash`
 
-3. Start the test suite:
+4. Start the test suite:
     - `$ yarn test:watch`
     *This will re-run the test suite after every save and produce a coverage report*
 
