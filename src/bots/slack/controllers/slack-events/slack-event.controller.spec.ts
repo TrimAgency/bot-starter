@@ -1,4 +1,4 @@
-import { request } from '../../../spec/spec-helpers';
+import { request } from '../../../../spec/spec-helpers';
 
 describe('slack event controller API', () => {
   describe('Setup Confirmation', () => {

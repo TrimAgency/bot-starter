@@ -22,9 +22,14 @@
     [ ] Add your bot to your Slack team
         [ ] visit [https://BOT_URL/install](https://BOT_URL/install)
 
+4. [Node Version Manager](https://github.com/nvm-sh/nvm) and version 14.1.0
+
 ## Quick Start
 
-1. After cloning the project, in your terminal: `$ dc up`.  This builds and starts the containers for development.
+After cloning the project, in your terminal:
+1. Install dependencies `$ yarn install`
+
+2. `$ dc up`.  This builds and starts the containers for development.
 
 2. This app is set up for TDD. To begin, access the server's (node app's) command line:
     - `$ docker exec -it server bash`
@@ -39,10 +44,10 @@
 - Code Coverage Goal is to test 80% of functions with unit tests.  You can adjust the coverage report in `jest.config.js`
 - TRIM will test 100% of Conversations with an integration test
   - Integrations tests that focus on testing the **final result** of a conversation (and different scenarios related to a final result)
-      *Example: Booking a meeting*
-        - When a user provides all the details for their meeting, the bot responds with the booking confirmation and creates the meeting. (Happy Path)
-        - If a user provides bad data in a conversation (mixed up meeting times that don’t make sense, etc.), the bot responds with the relevant message.
-        - When a user has an error from a 3rd Party API (NOT Slack) over the course of the conversation, the bot responds with a general error message.
+    - *Example: Booking a meeting*
+      - When a user provides all the details for their meeting, the bot responds with the booking confirmation and creates the meeting. (Happy Path)
+      - If a user provides bad data in a conversation (mixed up meeting times that don’t make sense, etc.), the bot responds with the relevant message.
+      - When a user has an error from a 3rd Party API (NOT Slack) over the course of the conversation, the bot responds with a general error message.
 
         *NOTE: Be careful and avoid testing the conversation's many possible variations/flow within an integration test.  Use a unit test to test the various possibilities instead.*
 
@@ -51,6 +56,8 @@
 ## Adding Libraries
 
 1. `$ docker exec -it bot-server bash`
-2. Install using yarn
-3. `$docker-compose down`
-4. `$ docker-compose up --build`
+2. Install using yarn:
+    - `> yarn add <lib>`
+3. `> exit`
+4. `$ docker-compose down`
+5. `$ docker-compose up --build`
