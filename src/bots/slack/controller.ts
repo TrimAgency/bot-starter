@@ -6,6 +6,7 @@ import { SLACK_WEBHOOK } from '../../constants';
 import { app } from '../../server';
 // Conversations
 import { onMessageConversation } from './modules/message.conversation';
+import { introductionDialog } from './modules/introduction-example.ts/introduction';
 
 export const initSlackController = (adapter: SlackAdapter) => {
   const controller = new Botkit({
@@ -19,6 +20,8 @@ export const initSlackController = (adapter: SlackAdapter) => {
   controller.ready(async () => {
     // Generic message response
     onMessageConversation(controller);
+    // Example that asks a user their name and favorite color
+    introductionDialog(controller);
 
     // On DM example
     controller.on(
