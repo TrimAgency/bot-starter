@@ -50,7 +50,7 @@ export const configSlackBotAdapter = async () => {
 
     // parameters used to secure webhook endpoint
     verificationToken: process.env.SLACK_BOT_VERIFICATION_TOKEN,
-    clientSigningSecret: process.env.SLACK_CLIENT_SIGNING_SECRET,
+    clientSigningSecret: process.env.SLACK_BOT_CLIENT_SIGNING_SECRET,
 
     // credentials used to set up oauth for multi-team apps
     clientId: process.env.SLACK_CLIENT_ID,

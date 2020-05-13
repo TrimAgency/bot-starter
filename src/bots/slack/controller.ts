@@ -239,23 +239,19 @@ export const initSlackController = (adapter: SlackAdapter) => {
   controller.webserver.get(
     '/install/auth',
     async (req: Request, res: Response) => {
-      console.log('req', req);
       try {
         const results = await controller.adapter.validateOauthCode(
           req.query.code
         );
-
-        console.log('FULL OAUTH DETAILS', results);
-
+        const teamId: string = results.team.id;
+        const slackTeamUrl: string = `https://app.slack.com/client/${teamId}`;
+        // Payload return differs for v1 and v2 oauth
         // Store token by team in bot state.
-        storage.write({
-          [results.team_id]: {
-            bot_access_token: results.bot.bot_access_token,
-            bot_user_id: results.bot.bot_user_id,
-          },
-        });
-
-        res.json('Success! Bot installed.');
+        tokenCache[teamId] = results.access_token;
+        // Capture team to bot id
+        userCache[teamId] = results.bot_user_id;
+        console.log('OAUTH SUCCESS! Team Data Saved');
+        res.redirect(slackTeamUrl);
       } catch (err) {
         console.error('OAUTH ERROR:', err);
         res.status(401);
