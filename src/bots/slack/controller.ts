@@ -1,8 +1,9 @@
 import { SlackAdapter, SlackBotWorker } from 'botbuilder-adapter-slack';
 import { Botkit, BotkitMessage } from 'botkit';
-import { Response, Request } from 'express';
+import { Response } from 'express';
 import { storage } from './storage';
 import { SLACK_WEBHOOK } from '../../constants';
+import { app } from '../../server';
 // Conversations
 import { onMessageConversation } from './modules/message.conversation';
 
@@ -11,6 +12,7 @@ export const initSlackController = (adapter: SlackAdapter) => {
     adapter,
     webhook_uri: SLACK_WEBHOOK,
     storage,
+    webserver: app,
     // ...other options
   });
 
@@ -235,28 +237,4 @@ export const initSlackController = (adapter: SlackAdapter) => {
   controller.webserver.get('/', ({ res }: { res: Response }) => {
     res.send(`This app is running Botkit ${controller.version}.`);
   });
-
-  controller.webserver.get(
-    '/install/auth',
-    async (req: Request, res: Response) => {
-      try {
-        const results = await controller.adapter.validateOauthCode(
-          req.query.code
-        );
-        const teamId: string = results.team.id;
-        const slackTeamUrl: string = `https://app.slack.com/client/${teamId}`;
-        // Payload return differs for v1 and v2 oauth
-        // Store token by team in bot state.
-        tokenCache[teamId] = results.access_token;
-        // Capture team to bot id
-        userCache[teamId] = results.bot_user_id;
-        console.log('OAUTH SUCCESS! Team Data Saved');
-        res.redirect(slackTeamUrl);
-      } catch (err) {
-        console.error('OAUTH ERROR:', err);
-        res.status(401);
-        res.send(err.message);
-      }
-    }
-  );
 };
