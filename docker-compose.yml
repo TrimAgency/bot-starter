@@ -1,8 +1,8 @@
-version: '3.7'
+version: "3.7"
 services:
   db:
-    image: mongo:latest
     container_name: bot-db
+    image: mongo:latest
     env_file:
       - .env
     volumes:
@@ -13,7 +13,7 @@ services:
     image: redis:6.0.1
     container_name: bot-redis
     ports:
-      - '6379:6379'
+      - "6379:6379"
     volumes:
       - ./local-data/redis:/redis
     restart: always
@@ -23,7 +23,8 @@ services:
     image: node:14.1.0-buster
     build: .
     ports:
-      - '4000:4000'
+      - "4000:4000"
+      - "3000:3000"
     environment:
       NODE_ENV: development
     depends_on:
@@ -33,5 +34,4 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - /app/node_modules
       - .:/app

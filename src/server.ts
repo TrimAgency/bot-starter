@@ -1,18 +1,28 @@
-import { Express } from 'express';
-import * as express from 'express';
+// Load environment
+require('dotenv').config();
+import * as e from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import { headers } from './middleware/headers';
 import { routes } from './routes';
+
 import { createRedisClient } from './clients/redis/redis.client';
+import { db } from './clients/db/mongoose.client';
+import { initSlackBot } from './bots/slack/init';
 
 // Creates Redis Client
 export const redis = createRedisClient();
 
-// Server Setup
-const port = process.env.SERVER_PORT || 4000;
+// Connect to DB via Mongoose
+db();
 
-export const app: Express = express();
+// Initialize Slackbot
+initSlackBot();
+
+// Express Server Setup
+const port = process.env.EXPRESS_SERVER_PORT || 4000;
+
+export const app: e.Express = e();
 const corsOptions: cors.CorsOptions = {
   optionsSuccessStatus: 200,
 };
@@ -25,6 +35,6 @@ routes(app);
 
 if (process.env.NODE_ENV !== 'test') {
   app.listen(port, async () => {
-    console.log(`*****\nSlackBot Server started on port: ${port}\n******`);
+    console.log(`*****\nExpress Server started on port: ${port}\n******`);
   });
 }
