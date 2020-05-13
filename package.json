@@ -1,6 +1,6 @@
 {
   "name": "bot-starter",
-  "version": "alpha",
+  "version": "1.0",
   "description": "TRIM Typescript Starter for Slackbots",
   "main": "src/server.ts",
   "scripts": {
