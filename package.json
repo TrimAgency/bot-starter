@@ -8,8 +8,8 @@
     "docker:build": "docker-compose build -t ${npm_package_name}:${npm_package_version} .",
     "start": "node dist/server.js",
     "dev": "nodemon -L",
-    "test": "jest --coverage",
-    "test:watch": "jest --coverage --watchAll",
+    "test": "jest --coverage --detectOpenHandles",
+    "test:watch": "jest --coverage --watchAll --detectOpenHandles",
     "build:watch": "onchange 'src/**/*.ts' -- yarn run build",
     "clean": "rm -rf coverage dist"
   },
