@@ -13,8 +13,11 @@ const INTRODUCTION_DIALOG_ID = 'intro-convo';
 export async function introductionDialog(controller: Botkit) {
   //   Trigger the Dialog
   controller.hears(
+    // listens for the following regex patterns
     ['^convo', '^intro'],
+    // in the following message types
     'direct_message, direct_mention',
+    // creates an instance of a conversation
     async (bot: SlackBotWorker, message: BotkitMessage) => {
       let convo: BotkitConversation = new BotkitConversation(
         INTRODUCTION_DIALOG_ID,
