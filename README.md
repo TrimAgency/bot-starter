@@ -1,5 +1,7 @@
 # TRIM SlackBot Starter
 
+A Node Server written in Typescript and designed to get you quickly building Slackbots with Botkit + the [Slack adapter](https://botkit.ai/docs/v4/platforms/slack.html).
+
 ## Prerequisites
 
 1. Set up A URL for the OAuth redirect you will need once your slack wprkspace and app are set up

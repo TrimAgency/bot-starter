@@ -1,5 +1,10 @@
 // Load environment
-require('dotenv').config();
+import * as dotenv from 'dotenv';
+const env = process.env.NODE_ENV;
+if (env !== 'production') {
+  dotenv.config();
+}
+
 import * as e from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
