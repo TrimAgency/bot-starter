@@ -12,6 +12,9 @@ export const MONGO_URI =
     ? process.env.MONGODB_URI
     : `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@bot-db:27017/?authSource=admin`;
 
+// Redis
+export const REDIS_CONNECTION = process.env.REDIS_URL || '';
+
 /*********
  SLACK
  **********/
