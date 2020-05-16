@@ -16,3 +16,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Adds Redis
 - Adds Bull for async + scheduled Jobs
 - Add example conversation
+- Add slash command example

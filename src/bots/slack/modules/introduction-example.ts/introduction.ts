@@ -10,7 +10,7 @@ import {
 
 const INTRODUCTION_DIALOG_ID = 'intro-convo';
 
-export async function introductionDialog(controller: Botkit) {
+export const introductionDialog = async (controller: Botkit) => {
   //   Trigger the Dialog
   controller.hears(
     // listens for the following regex patterns
