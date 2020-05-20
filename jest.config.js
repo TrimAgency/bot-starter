@@ -14,6 +14,7 @@ module.exports = {
     'src/spec/',
     'src/server.ts',
     'src/clients',
+    'threads/',
   ],
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
 };

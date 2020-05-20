@@ -1,5 +1,23 @@
+import * as dotenv from 'dotenv';
+
+// Attach .env variables to process.env
+const env = process.env.NODE_ENV;
+if (env !== 'production') {
+  dotenv.config();
+}
+
 // Mongo
-export const MONGO_URI = `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@bot-db:27017/?authSource=admin`;
+export const MONGO_URI =
+  process.env.NODE_ENV === 'production'
+    ? process.env.MONGODB_URI
+    : `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@bot-db:27017/?authSource=admin`;
+
+// Redis
+export const REDIS_CONNECTION = process.env.REDIS_URL || '';
+
+/*********
+ SLACK
+ **********/
 
 // Slack Webhook
 export const SLACK_WEBHOOK = `/api/messages`;

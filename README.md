@@ -1,5 +1,7 @@
 # TRIM SlackBot Starter
 
+A Node Server written in Typescript and designed to get you quickly building Slackbots with Botkit + the [Slack adapter](https://botkit.ai/docs/v4/platforms/slack.html).
+
 ## Prerequisites
 
 1. Set up A URL for the OAuth redirect you will need once your slack wprkspace and app are set up
@@ -51,8 +53,9 @@ After cloning the project, in your terminal:
       - When a user has an error from a 3rd Party API (NOT Slack) over the course of the conversation, the bot responds with a general error message.
 
         *NOTE: Be careful and avoid testing the conversation's many possible variations/flow within an integration test.  Use a unit test to test the various possibilities instead.*
+- To ignore a directory or file in the coverage report, add the appropriate regex/path to the `coveragePathIgnorePatterns` array in `jest.config.js`.  [More Here.](https://jestjs.io/docs/en/configuration#coveragepathignorepatterns-arraystring)
 
-- To test persisted objects this reposotory uses a [Jest preset](https://github.com/shelfio/jest-mongodb) for [mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server).  This preset sets the process.env.MONGO_URL for your convenience.
+- To test persisted objects this reposotory uses a [Jest preset](https://github.com/shelfio/jest-mongodb) for [mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server).  This preset sets the process.env.MONGO_URL for your convenience.  FYI, This preset will initiate a download of mongo when you first run your test suite.  Subsequent iterations will not do this.
 
 ## Adding Libraries
 

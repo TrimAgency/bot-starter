@@ -52,10 +52,10 @@ export const configSlackBotAdapter = async () => {
     verificationToken: process.env.SLACK_BOT_VERIFICATION_TOKEN,
     clientSigningSecret: process.env.SLACK_BOT_CLIENT_SIGNING_SECRET,
 
+    scopes: BOT_SCOPE_LIST,
     // credentials used to set up oauth for multi-team apps
     clientId: process.env.SLACK_CLIENT_ID,
     clientSecret: process.env.SLACK_CLIENT_SECRET,
-    scopes: BOT_SCOPE_LIST,
     redirectUri: process.env.SLACK_BOT_REDIRECT_URI,
     getTokenForTeam,
     getBotUserByTeam,
