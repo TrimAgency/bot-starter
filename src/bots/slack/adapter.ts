@@ -46,7 +46,7 @@ export const configSlackBotAdapter = async () => {
   // A BotKit configuration
   const slackAdapter: SlackAdapter = new SlackAdapter({
     // auth token for a single-team app
-    botToken: process.env.SLACK_BOT_TOKEN,
+    botToken: process.env.SLACK_BOT_OAUTH_TOKEN,
 
     // parameters used to secure webhook endpoint
     verificationToken: process.env.SLACK_BOT_VERIFICATION_TOKEN,
@@ -54,8 +54,8 @@ export const configSlackBotAdapter = async () => {
 
     scopes: BOT_SCOPE_LIST,
     // credentials used to set up oauth for multi-team apps
-    clientId: process.env.SLACK_CLIENT_ID,
-    clientSecret: process.env.SLACK_CLIENT_SECRET,
+    clientId: process.env.SLACK_BOT_CLIENT_ID,
+    clientSecret: process.env.SLACK_BOT_CLIENT_SECRET,
     redirectUri: process.env.SLACK_BOT_REDIRECT_URI,
     getTokenForTeam,
     getBotUserByTeam,

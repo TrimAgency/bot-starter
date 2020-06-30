@@ -1,35 +1,35 @@
-// Load environment
 import * as dotenv from 'dotenv';
+// Attach .env variables to process.env
 const env = process.env.NODE_ENV;
 if (env !== 'production') {
   dotenv.config();
 }
-
-import * as e from 'express';
+import { Express } from 'express';
+import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import * as cors from 'cors';
 import { headers } from './middleware/headers';
-import { routes } from './routes';
+import * as cors from 'cors';
 
-import { sequelize } from './db/models';
 import { mongo } from './mongoose/client';
-
-import { createRedisClient } from './redis/client';
+import { sequelize } from './db/models';
 
 import { initSlackBot } from './bots/slack/init';
-
+import { createRedisClient } from './redis/client';
+import './redis/jobs-index';
 import { createWinstonLogger } from './logging/winston';
 
-// Creates Redis Client
-export const redis = createRedisClient();
+// Routes need to be imported last to avoid issues with Botkit and Bull
+import { routes } from './routes';
 
-// Create Logger
+// Intialize Logger
 export const logger = createWinstonLogger();
 
-// Express Server Setup
-const port = process.env.PORT || 4000;
+// Creates Redis Client and initiates cron jobs
+export const redis = createRedisClient();
 
-export const app: e.Express = e();
+// Server Setup
+const port = process.env.PORT || 4000;
+export const app: Express = express();
 const corsOptions: cors.CorsOptions = {
   optionsSuccessStatus: 200,
 };
@@ -42,17 +42,16 @@ routes(app);
 
 if (process.env.NODE_ENV !== 'test') {
   app.listen(port, async () => {
-    logger.info(`*****\nExpress Server started on port: ${port}\n******`);
+    logger.info(`Express Server started on port: ${port}`);
   });
 }
-
-// Connect to DB via Mongoose
-mongo().then(() =>
-  // Initialize Slackbot after DB is connected
-  initSlackBot()
-);
 
 // Connect to DB via PG
 sequelize()
   .sync({ force: process.env.NODE_ENV === 'test' })
+  .catch((error: Error) => logger.error(error.message));
+
+// Connect to Bot Storage
+mongo()
+  .then(() => initSlackBot())
   .catch((error: Error) => logger.error(error.message));

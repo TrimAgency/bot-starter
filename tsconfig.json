@@ -12,6 +12,7 @@
     "downlevelIteration": true,
     "importHelpers": true,
     "moduleResolution": "node",
+    "experimentalDecorators": true,
     "lib": ["dom", "es2017"]
   }
 }

@@ -6,9 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
-### Added
-
 ### 1.0 [5-18-20]
+
+## Added
 
 - Typescript, Prettier and formatting
 - Testing with Jest + MongoDB in-memory server
@@ -19,3 +19,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Adds Bull for async + scheduled Jobs
 - Add example conversation
 - Add slash command example
+
+### 2.0 [6-30-20]
+
+## Added
+
+- Add postgres + Sequelize ORM
+- Use mongo for bot storage
+- Add Winston for Logging
+- Update readme

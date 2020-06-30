@@ -1,6 +1,6 @@
 import * as Redis from 'redis';
 import { RetryStrategyOptions } from 'redis';
-import { REDIS_CONNECTION } from '../../constants';
+import { REDIS_CONNECTION } from '../constants';
 
 const url = REDIS_CONNECTION;
 const port = process.env.REDIS_PORT ? parseInt(process.env.REDIS_PORT) : 6379;

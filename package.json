@@ -11,7 +11,10 @@
     "test": "jest --coverage --detectOpenHandles",
     "test:watch": "jest --coverage --watchAll --detectOpenHandles",
     "build:watch": "onchange 'src/**/*.ts' -- yarn run build",
-    "clean": "rm -rf coverage dist"
+    "clean": "rm -rf coverage dist",
+    "heroku-postbuild": "yarn run build",
+    "seeds-up": "ts-node src/db/seeders/seeds-up.ts",
+    "seeds-down": "ts-node src/db/seeders/seeds-down.ts"
   },
   "engines": {
     "node": "14.1.0"
@@ -35,11 +38,17 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.13",
+    "pg": "^8.2.1",
     "redis": "^3.0.2",
-    "ts-node": "^8.10.1"
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^5.21.11",
+    "sequelize-typescript": "^1.1.0",
+    "ts-node": "^8.10.1",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.1.5",
+    "@types/bluebird": "^3.5.32",
     "@types/body-parser": "^1.19.0",
     "@types/bull": "^3.12.2",
     "@types/cors": "^2.8.6",
@@ -50,6 +59,7 @@
     "@types/node": "^13.13.5",
     "@types/redis": "^2.8.20",
     "@types/supertest": "^2.0.9",
+    "@types/validator": "^13.1.0",
     "jest": "^25.5.0",
     "nodemon": "^2.0.3",
     "onchange": "^7.0.2",

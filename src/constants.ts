@@ -10,7 +10,7 @@ if (env !== 'production') {
 export const MONGO_URI =
   process.env.NODE_ENV === 'production'
     ? process.env.MONGODB_URI
-    : `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@bot-db:27017/?authSource=admin`;
+    : `mongodb://${process.env.MONGO_INITDB_ROOT_USERNAME}:${process.env.MONGO_INITDB_ROOT_PASSWORD}@localhost:27018/?authSource=admin`;
 
 // Redis
 export const REDIS_CONNECTION = process.env.REDIS_URL || '';

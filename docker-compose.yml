@@ -1,37 +1,31 @@
 version: '3.7'
 services:
   db:
-    container_name: bot-db
+    container_name: sprint-bot-db
+    build:
+      context: .
+      dockerfile: db.Dockerfile
+    env_file:
+      - .env
+    ports:
+      - '5433:5432'
+    volumes:
+      - ./local-data/db:/data/db
+  bot-storage:
+    container_name: bot-storage
     image: mongo:latest
     env_file:
       - .env
     volumes:
-      - ./local-data/db:/data/db
+      - ./local-data/bot-storage:/data/bot-storage
     ports:
-      - 27017:27017
+      - 27018:27017
   redis:
     image: redis:6.0.1
     container_name: bot-redis
     ports:
-      - '6379:6379'
+      - '6380:6379'
     volumes:
       - ./local-data/redis:/redis
     restart: always
     command: redis-server
-  server:
-    image: node:14.1.0-buster
-    container_name: bot-server
-    build: .
-    ports:
-      - '4000:4000'
-    environment:
-      NODE_ENV: development
-    depends_on:
-      - db
-      - redis
-    command: yarn dev
-    stdin_open: true
-    tty: true
-    volumes:
-      - .:/app
-      - /app/node_modules
